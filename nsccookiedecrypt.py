@@ -26,17 +26,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @author: Adam Maxwell
+@updated by: Chris Bayliss
 @license: GPL v2
-@date: 23-01-2012
-@version: 0.3.1
+@date: 29-05-2019
+    - updated to support python v3
+@version: 0.3.2
 
 """
 
 import sys
 import re
-import string
-from string import maketrans, ascii_letters
-
 
 
 def parseCookie(cookie):
@@ -60,7 +59,7 @@ def decryptServiceName(servicename):
     @return: service name
     """
     #This decrypts the Caesar Subsitution Cipher Encryption used on the Netscaler Cookie Name
-    trans = maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','zabcdefghijklmnopqrstuvwxyZABCDEFGHIJKLMNOPQRSTUVWXY')
+    trans = str.maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ','zabcdefghijklmnopqrstuvwxyZABCDEFGHIJKLMNOPQRSTUVWXY')
     realname = servicename.translate(trans)
     return realname
         
@@ -107,6 +106,6 @@ if __name__ == '__main__':
     cookie = sys.argv[1]
     realname,realip,realport = decryptCookie(cookie)
     
-    print 'vServer Name=%s' %realname
-    print 'vServer IP=%s' %realip
-    print 'vServer Port=%s' %realport
+    print('vServer Name=%s' %realname)
+    print('vServer IP=%s' %realip)
+    print('vServer Port=%s' %realport)
